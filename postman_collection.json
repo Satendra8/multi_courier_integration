@@ -1,0 +1,169 @@
+{
+  "info": {
+    "_postman_id": "84c8a2b5-e630-4b9b-9a8c-9804b4d667ae",
+    "name": "Multi-Courier Integration Platform API",
+    "description": "Postman Collection for testing the Multi-Courier Integration API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Shipment (Single Order)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": \"UB-TEST-ORD-001\",\n  \"courier_partner\": \"urbanebolt\",\n  \"customer_details\": {\n    \"sender_name\": \"Merchant Inc\",\n    \"sender_mobile\": \"9999999999\",\n    \"sender_email\": \"shipping@merchant.com\",\n    \"sender_address\": \"Sender address line 1, Delhi\",\n    \"sender_city\": \"Delhi\",\n    \"sender_state\": \"Delhi\",\n    \"sender_pincode\": 110001,\n    \"receiver_name\": \"John Doe\",\n    \"receiver_mobile\": \"8320226438\",\n    \"receiver_email\": \"john@gmail.com\",\n    \"receiver_address\": \"Plot No. 26, Om Nagar Society, Surat\",\n    \"receiver_city\": \"Surat\",\n    \"receiver_state\": \"Gujarat\",\n    \"receiver_pincode\": 395007\n  },\n  \"shipment_details\": {\n    \"declared_value\": 1200,\n    \"collectable_value\": 1200,\n    \"pay_mode\": \"COD\",\n    \"weight\": 1.5,\n    \"item_description\": \"Tech gadgets\",\n    \"item_quantity\": 1,\n    \"height\": 10,\n    \"length\": 10,\n    \"width\": 10\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Shipment (MockCourier)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": \"MC-TEST-ORD-002\",\n  \"courier_partner\": \"mockcourier\",\n  \"customer_details\": {\n    \"receiver_name\": \"Alice Smith\",\n    \"receiver_mobile\": \"9425018023\",\n    \"receiver_email\": \"alice@gmail.com\",\n    \"receiver_address\": \"Govindpura Industrial Area, Bhopal\",\n    \"receiver_city\": \"Bhopal\",\n    \"receiver_state\": \"Madhya Pradesh\",\n    \"receiver_pincode\": 462023\n  },\n  \"shipment_details\": {\n    \"declared_value\": 800,\n    \"collectable_value\": 0,\n    \"pay_mode\": \"PREPAID\",\n    \"weight\": 0.8,\n    \"item_description\": \"Novel books\",\n    \"item_quantity\": 1\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Track Shipment",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/v1/orders/UB-TEST-ORD-001/track",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "UB-TEST-ORD-001",
+            "track"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cancel Order",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/v1/orders/UB-TEST-ORD-001/cancel",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "UB-TEST-ORD-001",
+            "cancel"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bulk Create Shipments",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orders\": [\n    {\n      \"order_id\": \"BULK-001\",\n      \"courier_partner\": \"urbanebolt\",\n      \"customer_details\": {\n        \"receiver_name\": \"Recv One\",\n        \"receiver_mobile\": \"9999900001\",\n        \"receiver_address\": \"Address Line 1\",\n        \"receiver_city\": \"Delhi\",\n        \"receiver_state\": \"Delhi\",\n        \"receiver_pincode\": 110001\n      },\n      \"shipment_details\": {\n        \"declared_value\": 250,\n        \"weight\": 0.4\n      }\n    },\n    {\n      \"order_id\": \"BULK-002\",\n      \"courier_partner\": \"mockcourier\",\n      \"customer_details\": {\n        \"receiver_name\": \"Recv Two\",\n        \"receiver_mobile\": \"9999900002\",\n        \"receiver_address\": \"Address Line 2\",\n        \"receiver_city\": \"Mumbai\",\n        \"receiver_state\": \"Maharashtra\",\n        \"receiver_pincode\": 400001\n      },\n      \"shipment_details\": {\n        \"declared_value\": 350,\n        \"weight\": 0.6\n      }\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/orders/bulk",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "bulk"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Poll Batch Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/v1/batches/BATCH-ID-HERE",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "batches",
+            "BATCH-ID-HERE"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+[2026-06-28T18:41:27.398Z] Error: Code: COURIER_AUTH_FAILURE | Status: 502 | Msg: UrbaneBolt Authentication failed: Request failed with status code 503
